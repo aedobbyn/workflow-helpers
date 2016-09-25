@@ -30,7 +30,7 @@
 
 * Add and commit all files in the directory
 	* `git add *` 
-	* `git add .gitignore`
+	* `git add .gitignore` (have to add files beginning with `.` by hand)
 	* Check you've got all the files you want and none of the ones you don't with `git status`
 	* `git commit -m "initial commit"`  
 	
@@ -74,6 +74,9 @@
 	* `git push -u origin master`
 	
 ###### Other things you might need to do 
+* Make a .gitignore outside of RStudio
+	* `touch .gitignore`
+	* `open .gitignore`
 * Push the experimental branch to remote repo
 	* `git push -u origin experimental`
 	* This creates a branch called experimental on the remote repo and pushes to that
@@ -82,7 +85,8 @@
 * Delete the repo
 	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
 	* Locally: `rm -fr .git`
-
+* In vi
+	* `:wq`
 
 
 <br><br><br><br>
