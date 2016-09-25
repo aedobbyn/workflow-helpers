@@ -82,6 +82,11 @@
 	* This creates a branch called experimental on the remote repo and pushes to that
 * Remove a file that should have been on .gitignore but wasn't
 	* `git rm --cached [file name]`
+* Move files to an enclosing directory
+	* `mkdir new_directory`
+	* `git mv file_to_move new_directory`
+	* [More complete explanation](https://githowto.com/moving_files) of why you need the `git` at the beginning
+	* For files not tracked by git you drop the `git`
 * Delete the repo
 	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
 	* Locally: `rm -fr .git`
