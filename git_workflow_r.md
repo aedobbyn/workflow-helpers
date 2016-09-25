@@ -85,8 +85,14 @@
 * Delete the repo
 	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
 	* Locally: `rm -fr .git`
-* In vi
-	* `:wq`
+	
+<br>
+
+* Get out of vi
+	* After `git diff`
+		* `:wq`
+	* After `git commit`, write commit message, then 
+		* Escape + `:wq` 
 
 
 <br><br><br><br>
