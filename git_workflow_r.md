@@ -29,8 +29,8 @@
 * In the directory, make a README.md in Mou
 
 * Add and commit all files in the directory
-	* `git add *` 
-	* `git add .gitignore` (have to add files beginning with `.` by hand)
+	* `git add .` 
+		* Note that `git add *` won't add files beginning with `.`, so you'd have to `git add .gitignore` by hand. By contrast, `git add .` *will* add your gitignore
 	* Check you've got all the files you want and none of the ones you don't with `git status`
 	* `git commit -m "initial commit"`  
 	
@@ -80,6 +80,7 @@
 * Push the experimental branch to remote repo
 	* `git push -u origin experimental`
 	* This creates a branch called experimental on the remote repo and pushes to that
+	* Refer to remote repos as `origin/master` and `origin/experimental`
 * Remove a file that should have been on .gitignore but wasn't
 	* `git rm --cached [file name]`
 	* need `git rm -r --cached [directory]` if it's a directory (`-r` for recursively)
