@@ -82,6 +82,7 @@
 	* This creates a branch called experimental on the remote repo and pushes to that
 * Remove a file that should have been on .gitignore but wasn't
 	* `git rm --cached [file name]`
+	* need `git rm -r --cached [directory]` if it's a directory (`-r` for recursively)
 * Move files to an enclosing directory
 	* `mkdir new_directory`
 	* `git mv file_to_move new_directory`
