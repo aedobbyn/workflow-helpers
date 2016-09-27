@@ -65,9 +65,12 @@ To knit document:
 * File > Compile notebook
 * Ball of yarn button
 
-<br>	
+Markdown talbles: 
+ 
+* `kable(table_name, format="markdown")`  
+	* The `format="markdown"` is critical for talbes to compile correctly on GitHub markdown docs
 
-	
+
 Shortcut for creating a chunk:
 
 * Command + Option + I
