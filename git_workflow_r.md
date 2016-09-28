@@ -45,7 +45,7 @@
 		* If you do, you'll have to pull these from the remote to master, add them, and then push them back to origin because they're upstream of master
 
 * Add the remote from the shell
-	* `git remote add origin [github url]`
+	* `git remote add origin <github url>`
 		* This names the remote "origin"
 * Check that it's set up correctly
 	* `git remote -v`
@@ -82,8 +82,8 @@
 	* This creates a branch called experimental on the remote repo and pushes to that
 	* Refer to remote repos as `origin/master` and `origin/experimental`
 * Remove a file that should have been on .gitignore but wasn't
-	* `git rm --cached [file name]`
-	* need `git rm -r --cached [directory]` if it's a directory (`-r` for recursively)
+	* `git rm --cached <file name>`
+	* need `git rm -r --cached <directory>` if it's a directory (`-r` for recursively)
 * Move files to an enclosing directory
 	* `mkdir new_directory`
 	* `git mv file_to_move new_directory`
@@ -92,10 +92,18 @@
 * Delete the repo
 	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
 	* Locally: `rm -fr .git`
-	
-<br>
-
-* Get out of vi
+* Command+Z, Command+Z, Command+Z
+	* Undo changes in working directory (for file not yet staged)
+		* `git checkout HEAD <file>`
+	* Unstage a file
+		* `git reset HEAD <file>`
+	* Cancel the latest commit
+		* `git revert HEAD`
+* Get to any stage in the commit history
+	* `git checkout <commit hash> <file>`
+	* [Remember](http://swcarpentry.github.io/git-novice/05-history/) that if you forget `<file>` you'll be in the detached HEAD state (:scream:)
+	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+* Work with vim
 	* After `git diff`
 		* `:wq`
 	* After `git commit`, write commit message, then 
