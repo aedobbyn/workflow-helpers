@@ -1,25 +1,28 @@
-### Git Workflow for R
+# GitR Done
 
-***
-##### Online resources
-* [General git tutorial](https://git-scm.com/docs/gittutorial)
 
-* [Version control in RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
 
-* [Jenny Bryan's short explanation](https://jennybc.github.io/2014-05-12-ubc/ubc-r/session03_git.html) [and woah a long one](http://happygitwithr.com/)
+<br>
 
-***
-##### In RStudio
+
+### *Git in R*
+
+
+##### From RStudio
+
 * Make sure the R script is in its own directory
 * Create an Rproj in that directory
-	* File > New Project > Existing Directory > type in directory path
+	* In a shell
+		* `touch .Rproj`
+	* In RStudio
+		* File > New Project > Existing Directory
 	* That should make version control features available for that directory
 	* You should see a Git tab next to Environment and History in the top right pane and files in the Files tab (bottom right pane)
 * If you don't see the Git tab, try opening the Rproj file. It should open in a new RStudio window.		
 * Add *.Rproj and .DS_Store to the .gitignore	
 
+
 		
-***
 ##### Initialize the repo and add files
 * In the shell, navigate to the directory
 * Initialize a repository in there
@@ -30,13 +33,12 @@
 
 * Add and commit all files in the directory
 	* `git add .` 
-		* Note that `git add *` won't add files beginning with `.`, so you'd have to `git add .gitignore` by hand. By contrast, `git add .` *will* add your gitignore
+		* (Note that `git add *` won't add files beginning with `.`, so you'd have to `git add .gitignore` by hand. By contrast, `git add .` *will* add your gitignore)
 	* Check you've got all the files you want and none of the ones you don't with `git status`
 	* `git commit -m "initial commit"`  
 	
 
 	
-***
 ##### Add a remote
 
 * Create repo on GitHub
@@ -47,14 +49,20 @@
 * Add the remote from the shell
 	* `git remote add origin <github url>`
 		* This names the remote "origin"
-* Check that it's set up correctly
+* Check that it's set up correctly to fetch and push
 	* `git remote -v`
 
 * Push everything to remote
 	* `git push -u origin master`
 
+<br><br>
+
 ***
-##### Work with git
+
+<br><br>
+
+
+### *Typical git workflow*
 
 * Make an experimental branch and switch to it
 	* `git checkout -b experimental`
@@ -70,46 +78,84 @@
 	* `git diff`
 	* Or in RStudio, hit the diff butt in the top right pane 
 * Add and commit everything and push it to remote
-	* `git commit -am "commit message"`
+	* `git add .`
+	* `git commit -m "commit message"`
 	* `git push -u origin master`
 	
-###### Other things you might need to do 
-* Make a .gitignore outside of RStudio
+<br><br>
+
+	
+***
+
+<br><br>
+
+	
+### *Generally useful things*
+
+* Make a .gitignore
 	* `touch .gitignore`
 	* `open .gitignore`
 * Push the experimental branch to remote repo
 	* `git push -u origin experimental`
+		* (Only need the `-u` for "upstream" the first time)
 	* This creates a branch called experimental on the remote repo and pushes to that
 	* Refer to remote repos as `origin/master` and `origin/experimental`
-* Remove a file that should have been on .gitignore but wasn't
-	* `git rm --cached <file name>`
-	* need `git rm -r --cached <directory>` if it's a directory (`-r` for recursively)
+
 * Move files to an enclosing directory
 	* `mkdir new_directory`
 	* `git mv file_to_move new_directory`
 	* [More complete explanation](https://githowto.com/moving_files) of why you need the `git` at the beginning
 	* For files not tracked by git you drop the `git`
-* Delete the repo
-	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
-	* Locally: `rm -fr .git`
-* Command+Z, Command+Z, Command+Z
-	* Undo changes in working directory (for file not yet staged)
-		* `git checkout HEAD <file>`
-	* Unstage a file
-		* `git reset HEAD <file>`
-	* Cancel the latest commit
-		* `git revert HEAD`
-* Get to any stage in the commit history
-	* `git checkout <commit hash> <file>`
-	* [Remember](http://swcarpentry.github.io/git-novice/05-history/) that if you forget `<file>` you'll be in the detached HEAD state (:scream:)
-	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+
 * Work with vim
 	* After `git diff`
 		* `:wq`
 	* After `git commit`, write commit message, then 
 		* Escape + `:wq` 
 
+	
+
+##### Command+Z, Command+Z, Command+Z
+* File not yet staged
+	* Undo changes in working directory (for file not yet staged)
+	* `git checkout HEAD <file>`
+* File staged
+	* Unstage it
+	* `git reset HEAD <file>`
+* File committed
+	* Cancel the latest commit
+	* `git revert HEAD`
+
+<br>
+
+* Get to any stage in the commit history
+	* `git checkout <commit hash> <file>`
+		* Only need the first 7 or so characters of the hash
+	* [Remember](http://swcarpentry.github.io/git-novice/05-history/) that if you forget `<file>` you'll be in the detached HEAD state (:scream:)  
+	<br>
+	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+	
+<br>
+
+* Remove a file that should have been on .gitignore but wasn't
+	* `git rm --cached <file name>`
+	* need `git rm -r --cached <directory>` if it's a directory (`-r` for recursively)
+	
+* Delete a repo
+	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
+	* Locally: `rm -fr .git`
+	
+	
+
 
 <br><br><br><br>
 
+***
+##### Online resources
+* [General git tutorial](https://git-scm.com/docs/gittutorial)
 
+* [Version control in RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
+
+* [Jenny Bryan's short explanation](https://jennybc.github.io/2014-05-12-ubc/ubc-r/session03_git.html) [and woah a long one](http://happygitwithr.com/)
+
+***
