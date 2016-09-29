@@ -106,9 +106,13 @@
 	* `git mv <file_to_move_1> <file_to_move_2> <new_directory>` 
 		* (For files not tracked by git you drop the `git`)
 		* [More complete explanation](https://githowto.com/moving_files) of why you need the `git` at the beginning for files tracked by git
-	* Alternatively, you can do `mv <file_to_move_1> <file_to_move_2>  ./git <new_directory>`
+	* Alternatively, you can do `mv <file_to_move_1> <file_to_move_2>  ./git <new_directory>` because this also moves your hidden git directory
 
-
+* Refering to commits without commit hashes
+	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+	* `^` means "the parent of"
+	* You can also [tag versions](https://githowto.com/tagging_versions)
+	
 * Work with vim
 	* After `git diff`
 		* `:wq`
@@ -125,22 +129,24 @@
 
 <br>
 
-For everything else...there's MasterCard. Or rather, [this tutorial](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/file-level-operations)  
+For everything else...there's MasterCard. Or rather, [this tutorial](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/file-level-operations).  
 
 <br>
 
-** Common use cases **  
+***
+
+***Common use cases***
 
 **File level**
 
-* File not yet staged
-	* Undo changes in working directory 
-	* `git checkout HEAD <file>`
-* File staged
+
+* File *staged*
 	* Unstage it. Don't change what's in the working direcotry.
 	* `git reset HEAD <file>`
 	* Adding `--soft` or `--hard` here doesn't do anything since you've included `<file>`. When you do that, the staged snapshot is always updated but the working directory is never updated.
-	
+* File *unstaged* (maybe you just unstaged it with the above or you never staged it in the first place)
+	* Undo changes in working directory 
+	* `git checkout HEAD <file>`
 
 <br> 
 
@@ -148,12 +154,11 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 
 * Undo the last few commits
 	* `git reset --hard HEAD~2`
-	* The commits after HEAD~2 will be thrown away when git does garbage collection
+	* The commits you made after HEAD~2 will be thrown away when git does garbage collection
 * Undo the last few commits by creating a new commit
 	* `git revert HEAD~2`
 		* Make a new commit that is the same as `HEAD~2` 
 		* This doesn't alter any commit history
-
 
 <br>
 
@@ -166,12 +171,16 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 * Delete a repo
 	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
 	* Locally: `rm -fr .git`
-	
 
 
-<br> <br>
+<br>
 
-##### More in depth on checkout, reset, and revert
+***	
+
+
+<br> 
+
+##### More in depth on `checkout`, `reset`, and `revert`
 
 
 * Checkout
@@ -185,7 +194,7 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 
 
 * Reset
-	* Undo changes on private branches
+	* For undoing things on private branches
 	* Move back to the previous commit
 		* `git reset HEAD`
 		* Default is `--mixed`
@@ -194,13 +203,13 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 			* "Change the working directory and the staged snapshot to the specified commit." This throws away all uncommitted changes.
 
 
-![git_reset_img](./git_reset.jpg "Git Reset")
+![git_reset_img](./git_reset.jpg "Git Reset JPG")
 
 
 <br>
 
 * Revert
-	* Undo committed changes on public branches
+	* For undoing committed changes on public branches
 	* Undo a commit by creating another commit
 		* Doesn't rewrite the commit history like `git reset` does
 
@@ -214,12 +223,13 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 	* (`git revert` doesn't have a file-level counterpart)
 * If you include a commit hash, you only need the first few characters of the hash
 	
-<br> 
 
-* Using HEAD instead of commit hashes
-	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+<br>
 
-<br> 
+
+In sum:
+
+![git_reset_table](./checkout_reset_rever_summary.jpg "Git Reset Table")
 
 
 
