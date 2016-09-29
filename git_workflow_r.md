@@ -103,9 +103,11 @@
 
 * Move files to an enclosing directory
 	* `mkdir new_directory`
-	* `git mv file_to_move new_directory`
-	* [More complete explanation](https://githowto.com/moving_files) of why you need the `git` at the beginning
-	* For files not tracked by git you drop the `git`
+	* `git mv <file_to_move_1> <file_to_move_2> <new_directory>` 
+		* (For files not tracked by git you drop the `git`)
+		* [More complete explanation](https://githowto.com/moving_files) of why you need the `git` at the beginning for files tracked by git
+	* Alternatively, you can do `mv <file_to_move_1> <file_to_move_2>  ./git <new_directory>`
+
 
 * Work with vim
 	* After `git diff`
@@ -114,28 +116,48 @@
 		* Escape + `:wq` 
 
 	
+<br>
 
-##### Command+Z, Command+Z, Command+Z
+#### Command+Z, Command+Z, Command+Z
+
+* Completely throw away your uncommitted changes
+	* `git reset --hard HEAD`
+
+<br>
+
+For everything else...there's MasterCard. Or rather, [this tutorial](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/file-level-operations)  
+
+<br>
+
+** Common use cases **  
+
+**File level**
+
 * File not yet staged
-	* Undo changes in working directory (for file not yet staged)
+	* Undo changes in working directory 
 	* `git checkout HEAD <file>`
 * File staged
-	* Unstage it
+	* Unstage it. Don't change what's in the working direcotry.
 	* `git reset HEAD <file>`
-* File committed
-	* Cancel the latest commit
-	* `git revert HEAD`
-
-<br>
-
-* Get to any stage in the commit history
-	* `git checkout <commit hash> <file>`
-		* Only need the first 7 or so characters of the hash
-	* [Remember](http://swcarpentry.github.io/git-novice/05-history/) that if you forget `<file>` you'll be in the detached HEAD state (:scream:)  
-	<br>
-	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+	* Adding `--soft` or `--hard` here doesn't do anything since you've included `<file>`. When you do that, the staged snapshot is always updated but the working directory is never updated.
 	
+
+<br> 
+
+**Commit Level**
+
+* Undo the last few commits
+	* `git reset --hard HEAD~2`
+	* The commits after HEAD~2 will be thrown away when git does garbage collection
+* Undo the last few commits by creating a new commit
+	* `git revert HEAD~2`
+		* Make a new commit that is the same as `HEAD~2` 
+		* This doesn't alter any commit history
+
+
 <br>
+
+**Other**
 
 * Remove a file that should have been on .gitignore but wasn't
 	* `git rm --cached <file name>`
@@ -145,7 +167,60 @@
 	* On GitHub: click the settings gear and scroll to the bottom to the "Danger Zone"
 	* Locally: `rm -fr .git`
 	
+
+
+<br> <br>
+
+##### More in depth on checkout, reset, and revert
+
+
+* Checkout
+	* Moves HEAD to any stage in the commit history
+	* `git checkout <commit hash> <file>`
+		
+	* [Remember](http://swcarpentry.github.io/git-novice/05-history/) that if you don't add  `<file>` you'll be in the detached HEAD state
+		* Don't start creating commits here until you create a new branch 
+
+<br>
+
+
+* Reset
+	* Undo changes on private branches
+	* Move back to the previous commit
+		* `git reset HEAD`
+		* Default is `--mixed`
+			* "Keep the working directory the same. Unstage all the changes I made since the last commit."
+		* `--hard`
+			* "Change the working directory and the staged snapshot to the specified commit." This throws away all uncommitted changes.
+
+
+![git_reset_img](./git_reset.jpg "Git Reset")
+
+
+<br>
+
+* Revert
+	* Undo committed changes on public branches
+	* Undo a commit by creating another commit
+		* Doesn't rewrite the commit history like `git reset` does
+
+
 	
+<br>
+
+
+* Remember that `git checkout` and `git reset` do different things at the commit level and the file level
+	* i.e., whether you include a file path as a parameter 
+	* (`git revert` doesn't have a file-level counterpart)
+* If you include a commit hash, you only need the first few characters of the hash
+	
+<br> 
+
+* Using HEAD instead of commit hashes
+	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
+
+<br> 
+
 
 
 <br><br><br><br>
