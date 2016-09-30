@@ -1,6 +1,7 @@
 # GitR Done
 
-
+* First, an explanation for the best way to go about setting up git with an R project
+* Then, useful git commands, especially for undoing things with `checkout`, `reset`, and `revert`
 
 <br>
 
@@ -11,10 +12,10 @@
 ##### From RStudio
 
 * Make sure the R script is in its own directory
-* Create an Rproj in that directory
-	* In a shell
+* Create an Rproj in that directory:
+	* Either in a shell
 		* `touch .Rproj`
-	* In RStudio
+	* Or in RStudio
 		* File > New Project > Existing Directory
 	* That should make version control features available for that directory
 	* You should see a Git tab next to Environment and History in the top right pane and files in the Files tab (bottom right pane)
@@ -90,7 +91,7 @@
 <br><br>
 
 	
-### *Generally useful things*
+### *Generally useful git things*
 
 * Make a .gitignore
 	* `touch .gitignore`
@@ -112,6 +113,8 @@
 	* `git checkout HEAD~1` is "HEAD minus 1" commit, `git checkout HEAD~2` is "HEAD minus 2" commits, etc.
 	* `^` means "the parent of"
 	* You can also [tag versions](https://githowto.com/tagging_versions)
+	* If you do use a commit hash, you only need the first few characters of the hash
+
 	
 * Work with vim
 	* After `git diff`
@@ -122,6 +125,9 @@
 	
 <br>
 
+***
+
+
 #### Command+Z, Command+Z, Command+Z
 
 * Completely throw away your uncommitted changes
@@ -129,11 +135,10 @@
 
 <br>
 
-For everything else...there's MasterCard. Or rather, [this tutorial](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/file-level-operations).  
+For everything else...there's MasterCard. Or rather, [one of many tutorials](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting/file-level-operations).  
 
 <br>
 
-***
 
 ***Common use cases***
 
@@ -158,7 +163,7 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 * Undo the last few commits by creating a new commit
 	* `git revert HEAD~2`
 		* Make a new commit that is the same as `HEAD~2` 
-		* This doesn't alter any commit history
+		* This doesn't alter any commit history, it just tacks on a new commit to the end
 
 <br>
 
@@ -221,7 +226,6 @@ For everything else...there's MasterCard. Or rather, [this tutorial](https://www
 * Remember that `git checkout` and `git reset` do different things at the commit level and the file level
 	* i.e., whether you include a file path as a parameter 
 	* (`git revert` doesn't have a file-level counterpart)
-* If you include a commit hash, you only need the first few characters of the hash
 	
 
 <br>
