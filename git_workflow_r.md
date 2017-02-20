@@ -200,8 +200,10 @@ For everything else...there's MasterCard. Or rather, [one of many tutorials](htt
 
 * Reset
 	* For undoing things on private branches
+	* Throw away uncommited changes
+		* `git reset --hard HEAD`
 	* Move back to the previous commit
-		* `git reset HEAD`
+		* `git reset HEAD^` (same as `git reset HEAD~1`) 
 		* Default is `--mixed`
 			* "Keep the working directory the same. Unstage all the changes I made since the last commit."
 		* `--hard`
